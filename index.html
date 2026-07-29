@@ -16,7 +16,7 @@
     --blue-soft:rgba(58,109,175,.12); --orange-soft:rgba(229,125,55,.12);
     --duo:linear-gradient(90deg,var(--blue),var(--orange));
     --glass:linear-gradient(rgba(251,247,238,.74),rgba(251,247,238,.74)) padding-box,
-      linear-gradient(135deg,rgba(58,109,175,.45),rgba(148,186,196,.28) 38%,rgba(234,173,98,.3) 62%,rgba(229,125,55,.45)) border-box;
+      linear-gradient(180deg,rgba(58,109,175,.4),rgba(148,186,196,.24) 40%,rgba(234,173,98,.26) 60%,rgba(229,125,55,.4)) border-box;
     --r:24px; --navhide:-96px;
     --shadow:0 24px 60px -24px rgba(20,35,75,.35);
     --shadow-soft:0 12px 40px -20px rgba(20,35,75,.24);
@@ -281,17 +281,25 @@
   /* ================= HERO ================= */
   .hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
     padding:calc(30px + env(safe-area-inset-top)) 20px 46px;}
-  .arch{position:relative;padding:clamp(46px,11vw,68px) clamp(30px,9vw,64px) clamp(20px,5vw,30px);margin-bottom:26px;}
-  .arch::before{content:"";position:absolute;inset:0;border:1.5px solid rgba(58,109,175,.4);
-    border-bottom:none;border-radius:999px 999px 0 0;}
-  .arch::after{content:"";position:absolute;inset:9px;border:1px solid var(--orange);opacity:.5;
-    border-bottom:none;border-radius:999px 999px 0 0;}
-  .arch .a-star{position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-    width:28px;height:28px;background:var(--cream);padding:0 3px;}
-  .arch .a-star svg{width:100%;height:100%;}
-  .arch .a-dot{position:absolute;bottom:0;width:8px;height:8px;border-radius:50%;}
-  .arch .a-dot.l{left:0;transform:translate(-50%,50%);background:var(--blue);}
-  .arch .a-dot.r{right:0;transform:translate(50%,50%);background:var(--orange);}
+  .arch{position:relative;padding:clamp(48px,12vw,70px) clamp(34px,10vw,64px) clamp(22px,5vw,30px);margin-bottom:26px;}
+  .arch::before,.arch::after{content:"";position:absolute;pointer-events:none;
+    border-radius:999px 999px 0 0;
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite:exclude;}
+  .arch::before{inset:0;padding:1.5px 1.5px 0 1.5px;
+    background:linear-gradient(100deg,var(--blue),var(--sky) 46%,var(--amber) 54%,var(--orange));}
+  .arch::after{inset:11px 13px 0 13px;padding:1px 1px 0 1px;opacity:.55;
+    background:linear-gradient(100deg,var(--sky),var(--amber));}
+  .arch .a-star{position:absolute;top:0;left:50%;transform:translate(-50%,-52%);z-index:1;
+    width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+    background:var(--paper);
+    box-shadow:0 8px 20px -8px rgba(20,35,75,.4), inset 0 0 0 1.5px rgba(234,173,98,.55);}
+  .arch .a-star svg{width:21px;height:21px;}
+  .arch .a-dot{position:absolute;bottom:0;width:11px;height:11px;border-radius:50%;background:var(--paper);}
+  .arch .a-dot.l{left:0;transform:translate(-50%,50%);border:2.5px solid var(--blue);box-shadow:0 0 0 3px rgba(58,109,175,.15);}
+  .arch .a-dot.r{right:0;transform:translate(50%,50%);border:2.5px solid var(--orange);box-shadow:0 0 0 3px rgba(229,125,55,.15);}
 
   .hero .eyebrow{font-size:11px;letter-spacing:.44em;text-transform:uppercase;font-weight:700;margin-bottom:16px;color:var(--blue);}
   .hero .names{color:var(--navy);line-height:.92;font-family:'Marck Script',cursive;font-size:clamp(52px,15.5vw,104px);}
@@ -312,7 +320,7 @@
   .countdown{display:flex;gap:9px;margin-bottom:36px;justify-content:center;}
   .cd-cell{min-width:68px;padding:14px 6px 12px;border-radius:18px;position:relative;
     background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    border:1.5px solid transparent;box-shadow:var(--shadow-soft);}
+    border:1.5px solid transparent;box-shadow:var(--shadow-soft), inset 0 1.5px 0 rgba(255,255,255,.7);}
   .cd-cell::after{content:"";position:absolute;left:22%;right:22%;top:0;height:2.5px;border-radius:0 0 3px 3px;opacity:.85;}
   .cd-cell:nth-child(odd)::after{background:linear-gradient(90deg,var(--blue),var(--sky));}
   .cd-cell:nth-child(even)::after{background:linear-gradient(90deg,var(--orange),var(--amber));}
@@ -324,7 +332,7 @@
     border-radius:var(--r);padding:22px 20px 20px;min-height:158px;
     display:flex;flex-direction:column;gap:4px;
     background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border:1.5px solid transparent;box-shadow:var(--shadow-soft);
+    border:1.5px solid transparent;box-shadow:var(--shadow-soft), inset 0 1.5px 0 rgba(255,255,255,.7);
     transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s;}
   @media(hover:hover){ .ch-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);} }
   .ch-card:active{transform:scale(.98);}
@@ -374,7 +382,7 @@
   .lnk{position:relative;display:flex;align-items:center;gap:16px;overflow:hidden;
     border-radius:var(--r);padding:18px 56px 18px 18px;
     background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border:1.5px solid transparent;box-shadow:var(--shadow-soft);
+    border:1.5px solid transparent;box-shadow:var(--shadow-soft), inset 0 1.5px 0 rgba(255,255,255,.7);
     transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s;}
   @media(hover:hover){ .lnk:hover{transform:translateY(-4px);box-shadow:var(--shadow);} }
   .lnk:active{transform:scale(.985);}
@@ -399,7 +407,7 @@
   /* dress code */
   .dress{position:relative;overflow:hidden;margin-top:44px;border-radius:var(--r);text-align:center;
     background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border:1.5px solid transparent;box-shadow:var(--shadow-soft);
+    border:1.5px solid transparent;box-shadow:var(--shadow-soft), inset 0 1.5px 0 rgba(255,255,255,.7);
     padding:30px 24px 32px;}
   .dress::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--duo);}
   .dress .d-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.32em;
@@ -435,7 +443,7 @@
   .cards{display:grid;gap:16px;}
   .card{position:relative;border-radius:var(--r);padding:24px 22px;overflow:hidden;
     background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border:1.5px solid transparent;box-shadow:var(--shadow-soft);
+    border:1.5px solid transparent;box-shadow:var(--shadow-soft), inset 0 1.5px 0 rgba(255,255,255,.7);
     display:flex;gap:17px;align-items:flex-start;transition:transform .4s,box-shadow .4s;}
   .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:0 3px 3px 0;}
   .cards .card:nth-child(odd)::before{background:linear-gradient(var(--blue),var(--sky));}
@@ -457,16 +465,16 @@
   .card p{margin:0;color:var(--navy);opacity:.74;font-size:14.5px;}
 
   /* timeline: duo line + alternating dots */
-  .timeline{position:relative;padding-left:38px;}
-  .timeline::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:2px;
+  .timeline{position:relative;padding-left:30px;}
+  .timeline::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;
     background:linear-gradient(180deg,var(--blue),var(--orange));border-radius:2px;opacity:.65;}
   .tl-item{position:relative;margin-bottom:16px;}
-  .tl-item::before{content:"";position:absolute;left:-32px;top:26px;width:14px;height:14px;border-radius:50%;background:var(--cream);}
+  .tl-item::before{content:"";position:absolute;left:-27px;top:24px;width:13px;height:13px;border-radius:50%;background:var(--cream);}
   .timeline .tl-item:nth-child(odd)::before{border:3px solid var(--blue);box-shadow:0 0 0 4px var(--blue-soft);}
   .timeline .tl-item:nth-child(even)::before{border:3px solid var(--orange);box-shadow:0 0 0 4px var(--orange-soft);}
   .tl-card{border-radius:var(--r);padding:19px 21px;
     background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-    border:1.5px solid transparent;box-shadow:var(--shadow-soft);transition:transform .4s,box-shadow .4s;}
+    border:1.5px solid transparent;box-shadow:var(--shadow-soft), inset 0 1.5px 0 rgba(255,255,255,.7);transition:transform .4s,box-shadow .4s;}
   @media(hover:hover){ .tl-card:hover{transform:translateX(4px);box-shadow:var(--shadow);} }
   .timeline .tl-item:nth-child(odd) .c-time{color:var(--blue);border-color:rgba(58,109,175,.45);}
   .timeline .tl-item:nth-child(even) .c-time{color:var(--orange);border-color:rgba(229,125,55,.45);}
@@ -479,7 +487,7 @@
 
   /* venue */
   .venue{margin-top:44px;border-radius:var(--r);overflow:hidden;position:relative;
-    background:var(--glass);border:1.5px solid transparent;box-shadow:var(--shadow-soft);}
+    background:var(--glass);border:1.5px solid transparent;box-shadow:var(--shadow-soft), inset 0 1.5px 0 rgba(255,255,255,.7);}
   .venue::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--duo);z-index:1;}
   .venue-head{padding:30px 24px 20px;text-align:center;}
   .venue-head .pin{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.32em;
@@ -701,7 +709,7 @@
         <div class="sec-script reveal">будем рады видеть вас!</div>
       </div>
       <div class="cards"><article class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v5a4 4 0 0 0 8 0V3"/><path d="M6 3h12"/><path d="M12 12v6"/><path d="M8 21h8"/></svg></div><div class="c-body"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>15:30</span><h3>Сбор гостей</h3><p>Ждём вас на улице возле ресторана, где вы сможете насладиться предпраздничной атмосферой.</p></div></article><article class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="13" r="5"/><circle cx="15" cy="11" r="5"/></svg></div><div class="c-body"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>16:00</span><h3>Торжественная церемония</h3><p>Самый волнительный и важный момент, который вы сможете разделить вместе с нами!</p></div></article><article class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h16"/><path d="M6 20V8a6 6 0 0 1 12 0v12"/><path d="M9 8h6"/></svg></div><div class="c-body"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>17:00 – 20:00</span><h3>Праздничный банкет</h3><p>Время душевных поздравлений, вкусных блюд и весёлой программы! Мы будем смеяться, делиться историями и создавать тёплую атмосферу праздника.</p></div></article><article class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg></div><div class="c-body"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>20:00 – 22:00</span><h3>Танцы до упаду!</h3><p>Зажигательная дискотека, любимая музыка и море позитива! Будем веселиться до самого вечера, чтобы этот день запомнился нам всем надолго.</p></div></article></div>
-      <div class="venue reveal"><div class="venue-head"><div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Место проведения</div><h3>Ресторан «Сибирь-Сибирь»</h3><div class="addr">Первомайская ул., 1А · Тюмень</div></div><div class="venue-photo"><img class="venue-img" src="" alt="Фасад ресторана Сибирь-Сибирь"></div><div class="venue-foot"><a class="btn" href="https://yandex.ru/maps/?mode=routes&rtext=~%D0%A2%D1%8E%D0%BC%D0%B5%D0%BD%D1%8C%2C%20%D0%9F%D0%B5%D1%80%D0%B2%D0%BE%D0%BC%D0%B0%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%201%D0%90" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>Открыть маршрут</a></div></div>
+      <div class="venue reveal"><div class="venue-head"><div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Место проведения</div><h3>Ресторан «Сибирь-Сибирь»</h3><div class="addr">Первомайская ул., 1А · Тюмень</div></div><div class="venue-photo"><img class="venue-img" src="" alt="Фасад ресторана Сибирь-Сибирь"></div><div class="venue-foot"><a class="btn" href="https://yandex.ru/maps/?mode=routes&rtext=~57.157510%2C65.542045&rtt=auto&z=15" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>Открыть маршрут</a></div></div>
       <div class="back-row reveal"><button class="btn ghost" data-go="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>На главную</button></div>
     </div>
   </section>
@@ -717,8 +725,8 @@
         <div class="sec-script reveal">нашим самым родным</div>
       </div>
       <div class="timeline"><div class="tl-item reveal"><div class="tl-card"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>11:00</span><h3>ЗАГС</h3><p>Дорогие родители, мы хотим пригласить вас разделить официальную часть нашего бракосочетания. Оно состоится в ЗАГСе по адресу: г.&nbsp;Тюмень, улица Малыгина, д.&nbsp;85, в Янтарном зале.</p></div></div><div class="tl-item reveal"><div class="tl-card"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>13:00 – 14:00</span><h3>Фотосессия с родителями</h3><p>Мы хотим запечатлеть нашу большую семью не только в памяти, но и на фото.</p></div></div><div class="tl-item reveal"><div class="tl-card"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>15:30</span><h3>Сбор гостей</h3><p>Ждём вас на улице возле ресторана, где вы сможете насладиться предпраздничной атмосферой.</p></div></div><div class="tl-item reveal"><div class="tl-card"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>16:00</span><h3>Торжественная церемония</h3><p>Самый волнительный и важный момент, который вы сможете разделить вместе с нами!</p></div></div><div class="tl-item reveal"><div class="tl-card"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>17:00 – 20:00</span><h3>Праздничный банкет</h3><p>Время душевных поздравлений, вкусных блюд и весёлой программы! Мы будем смеяться, делиться историями и создавать тёплую атмосферу праздника.</p></div></div><div class="tl-item reveal"><div class="tl-card"><span class="c-time"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>20:00 – 22:00</span><h3>Танцы до упаду!</h3><p>Зажигательная дискотека, любимая музыка и море позитива! Будем веселиться до самого вечера, чтобы этот день запомнился нам всем надолго.</p></div></div></div>
-      <div class="venue reveal"><div class="venue-head"><div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Официальная часть · 11:00</div><h3>Дворец бракосочетаний</h3><div class="addr">ул. Малыгина, 85 · Янтарный зал · Тюмень</div></div><div class="venue-photo"><img class="zags-img" src="" alt="Дворец бракосочетаний в Тюмени"></div><div class="venue-foot"><a class="btn" href="https://yandex.ru/maps/?mode=routes&rtext=~%D0%A2%D1%8E%D0%BC%D0%B5%D0%BD%D1%8C%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9C%D0%B0%D0%BB%D1%8B%D0%B3%D0%B8%D0%BD%D0%B0%2C%2085" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>Открыть маршрут</a></div></div>
-      <div class="venue reveal"><div class="venue-head"><div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Место проведения</div><h3>Ресторан «Сибирь-Сибирь»</h3><div class="addr">Первомайская ул., 1А · Тюмень</div></div><div class="venue-photo"><img class="venue-img" src="" alt="Фасад ресторана Сибирь-Сибирь"></div><div class="venue-foot"><a class="btn" href="https://yandex.ru/maps/?mode=routes&rtext=~%D0%A2%D1%8E%D0%BC%D0%B5%D0%BD%D1%8C%2C%20%D0%9F%D0%B5%D1%80%D0%B2%D0%BE%D0%BC%D0%B0%D0%B9%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%201%D0%90" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>Открыть маршрут</a></div></div>
+      <div class="venue reveal"><div class="venue-head"><div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Официальная часть · 11:00</div><h3>Дворец бракосочетаний</h3><div class="addr">ул. Малыгина, 85 · Янтарный зал · Тюмень</div></div><div class="venue-photo"><img class="zags-img" src="" alt="Дворец бракосочетаний в Тюмени"></div><div class="venue-foot"><a class="btn" href="https://yandex.ru/maps/?mode=routes&rtext=~57.136167%2C65.562562&rtt=auto&z=15" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>Открыть маршрут</a></div></div>
+      <div class="venue reveal"><div class="venue-head"><div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Место проведения</div><h3>Ресторан «Сибирь-Сибирь»</h3><div class="addr">Первомайская ул., 1А · Тюмень</div></div><div class="venue-photo"><img class="venue-img" src="" alt="Фасад ресторана Сибирь-Сибирь"></div><div class="venue-foot"><a class="btn" href="https://yandex.ru/maps/?mode=routes&rtext=~57.157510%2C65.542045&rtt=auto&z=15" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>Открыть маршрут</a></div></div>
       <div class="back-row reveal"><button class="btn ghost" data-go="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>На главную</button></div>
     </div>
   </section>
